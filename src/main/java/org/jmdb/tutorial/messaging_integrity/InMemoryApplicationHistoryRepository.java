@@ -7,8 +7,8 @@ public class InMemoryApplicationHistoryRepository implements ApplicationHistoryR
 
     private final Map<String, ApplicationHistory> histories = new HashMap<>();
 
-    @Override public ApplicationHistory getByApplicationId(String s) {
-        return null;
+    @Override public ApplicationHistory getByApplicationId(String applicationId) {
+        return histories.get(applicationId);
     }
 
 

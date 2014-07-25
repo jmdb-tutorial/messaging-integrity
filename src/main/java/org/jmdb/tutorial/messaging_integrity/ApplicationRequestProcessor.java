@@ -16,6 +16,7 @@ public class ApplicationRequestProcessor {
     public void processRequest(CreateApplicationRequest request) {
         Application application = request.toApplication();
 
+        this.applicationRepository.put(application);
 
         this.applicationHistoryPublisher.publishApplicationCreated(application);
 

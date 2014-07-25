@@ -17,15 +17,18 @@ public class ApplicationHistory {
     }
 
     public void addEvent(CreatedEvent createdEvent) {
-
-
+       events.add(createdEvent);
     }
 
     public String getApplicationId() {
         return applicationId;
     }
 
-    public static class CreatedEvent {
+    public List<HistoryEvent> getEvents() {
+        return events;
+    }
+
+    public static class CreatedEvent implements HistoryEvent {
         public CreatedEvent(String id) {
 
         }

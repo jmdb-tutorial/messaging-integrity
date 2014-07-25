@@ -12,10 +12,11 @@ public class ApplicationHistoryTest {
     private ApplicationRequestProcessor applicationRequestProcessor;
     private ApplicationHistoryRepository applicationHistoryRepository;
     private CreateApplicationRequest createApplicationRequest;
+    private ApplicationRepository applicationRepository;
 
     @Before
     public void setUp() {
-        ApplicationRepository applicationRepository = new InMemoryApplicationRepository();
+        applicationRepository = new InMemoryApplicationRepository();
         applicationHistoryRepository = new InMemoryApplicationHistoryRepository();
         ApplicationHistoryPublisher publisher = new ApplicationHistoryPublisher(applicationHistoryRepository);
 
@@ -31,9 +32,11 @@ public class ApplicationHistoryTest {
 
         applicationRequestProcessor.processRequest(createApplicationRequest);
 
+        Application application = applicationRepository.getById("APP-001");
         ApplicationHistory history = applicationHistoryRepository.getByApplicationId("APP-001");
 
-        assertThat(history.hasEvents(), equalTo(true));
+        assertThat(application.getId(), equalTo("APP-001"));
+        assertThat(history.getEvents().size(), equalTo(1));
 
     }
 }
