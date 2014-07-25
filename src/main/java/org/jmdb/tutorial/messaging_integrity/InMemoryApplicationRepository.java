@@ -1,4 +1,4 @@
-package org.jmdb.tutorial.messaging_resilience;
+package org.jmdb.tutorial.messaging_integrity;
 
 import java.util.HashMap;
 import java.util.Map;
