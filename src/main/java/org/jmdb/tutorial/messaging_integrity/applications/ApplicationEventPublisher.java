@@ -1,7 +1,8 @@
 package org.jmdb.tutorial.messaging_integrity.applications;
 
-import org.jmdb.tutorial.messaging_integrity.applications.Application;
+
 import org.jmdb.tutorial.messaging_integrity.history.History;
+import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 
 public class ApplicationEventPublisher {
@@ -13,7 +14,7 @@ public class ApplicationEventPublisher {
 
     public void publishCreatedEvent(Application application) {
         History history = new History(application.getCustomerId());
-        history.addEvent(new History.CreatedEvent(application.getId()));
+        history.addEvent(new HistoryEvent("application-created"));
         historyRepository.put(history);
 
     }

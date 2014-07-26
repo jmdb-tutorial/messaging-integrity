@@ -16,8 +16,8 @@ public class History {
         return events.isEmpty();
     }
 
-    public void addEvent(CreatedEvent createdEvent) {
-       events.add(createdEvent);
+    public void addEvent(HistoryEvent event) {
+       events.add(event);
     }
 
     public String getCustomerId() {
@@ -28,14 +28,4 @@ public class History {
         return events;
     }
 
-    public static class CreatedEvent implements HistoryEvent {
-        private String eventType = "application-created";
-
-        public CreatedEvent(String id) {
-        }
-
-        @Override public String getEventType() {
-            return eventType;
-        }
-    }
 }

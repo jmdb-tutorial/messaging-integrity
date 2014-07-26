@@ -11,6 +11,7 @@ import org.jmdb.tutorial.messaging_integrity.email.SMTPGateway;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
 import org.jmdb.tutorial.messaging_integrity.history.History;
+import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.history.InMemoryHistoryRepository;
 import org.junit.Before;
@@ -69,6 +70,10 @@ public class HappyPathEmailIntegrityTest {
     public void emails_are_in_history() {
         History history = historyRepository.getByCustomerId("CUST-001");
 
+        assertThat(history.getEvents().size(), equalTo(1));
+
+        HistoryEvent historyEvent = history.getEvents().get(0);
+        assertThat(historyEvent.getEventType(), equalTo("email-sent"));
     }
 
     @Test
