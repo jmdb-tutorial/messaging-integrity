@@ -4,10 +4,10 @@ import org.jmdb.tutorial.messaging_integrity.applications.Application;
 import org.jmdb.tutorial.messaging_integrity.history.History;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 
-public class ApplicationHistoryPublisher {
+public class ApplicationEventPublisher {
     private HistoryRepository historyRepository;
 
-    public ApplicationHistoryPublisher(HistoryRepository historyRepository) {
+    public ApplicationEventPublisher(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;
     }
 

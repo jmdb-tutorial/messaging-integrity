@@ -2,7 +2,7 @@ package org.jmdb.tutorial.messaging_integrity;
 
 import org.jmdb.tutorial.messaging_integrity.applications.Application;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationAdminRepository;
-import org.jmdb.tutorial.messaging_integrity.applications.ApplicationHistoryPublisher;
+import org.jmdb.tutorial.messaging_integrity.applications.ApplicationEventPublisher;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequest;
@@ -33,7 +33,7 @@ public class HistoryFailsApplicationIntegrityTest {
         EventStore eventStore = new InMemoryEventStore();
 
         historyRepository = new InMemoryHistoryRepository();
-        ApplicationHistoryPublisher publisher = new FailingHistoryPublisher(historyRepository, "APP-001");
+        ApplicationEventPublisher publisher = new FailingEventPublisher(historyRepository, "APP-001");
 
         applicationRepository = new ApplicationRepository(eventStore, publisher, new AuthorisationContext());
         applicationAdminRepository = new ApplicationAdminRepository(eventStore);
@@ -68,11 +68,11 @@ public class HistoryFailsApplicationIntegrityTest {
     }
 
 
-    private static class FailingHistoryPublisher extends ApplicationHistoryPublisher {
+    private static class FailingEventPublisher extends ApplicationEventPublisher {
 
         private final String idToFailOn;
 
-        public FailingHistoryPublisher(HistoryRepository historyRepository, String idToFailOn) {
+        public FailingEventPublisher(HistoryRepository historyRepository, String idToFailOn) {
             super(historyRepository);
             this.idToFailOn = idToFailOn;
         }

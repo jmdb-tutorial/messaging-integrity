@@ -2,7 +2,7 @@ package org.jmdb.tutorial.messaging_integrity;
 
 import org.jmdb.tutorial.messaging_integrity.applications.Application;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationAdminRepository;
-import org.jmdb.tutorial.messaging_integrity.applications.ApplicationHistoryPublisher;
+import org.jmdb.tutorial.messaging_integrity.applications.ApplicationEventPublisher;
 import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
@@ -32,7 +32,7 @@ public class HappyPathApplicationIntegrityTest {
         EventStore eventStore = new InMemoryEventStore();
 
         historyRepository = new InMemoryHistoryRepository();
-        ApplicationHistoryPublisher publisher = new ApplicationHistoryPublisher(historyRepository);
+        ApplicationEventPublisher publisher = new ApplicationEventPublisher(historyRepository);
 
         applicationRepository = new ApplicationRepository(eventStore, publisher, new AuthorisationContext());
         applicationAdminRepository = new ApplicationAdminRepository(eventStore);
