@@ -1,4 +1,4 @@
-package org.jmdb.tutorial.messaging_integrity;
+package org.jmdb.tutorial.messaging_integrity.applications;
 
 public class CreateApplicationRequest {
     private final String id;

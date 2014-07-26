@@ -1,4 +1,6 @@
-package org.jmdb.tutorial.messaging_integrity;
+package org.jmdb.tutorial.messaging_integrity.applications;
+
+import org.jmdb.tutorial.messaging_integrity.history.ApplicationHistoryPublisher;
 
 public class ApplicationRequestProcessor {
 

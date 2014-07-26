@@ -1,7 +1,9 @@
-package org.jmdb.tutorial.messaging_integrity;
+package org.jmdb.tutorial.messaging_integrity.applications;
+
+import org.jmdb.tutorial.messaging_integrity.history.History;
 
 public class Application {
-    private ApplicationHistory history;
+    private History history;
     private String id;
 
     public Application(String id) {

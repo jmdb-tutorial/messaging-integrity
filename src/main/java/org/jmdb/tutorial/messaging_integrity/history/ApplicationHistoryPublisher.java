@@ -1,4 +1,7 @@
-package org.jmdb.tutorial.messaging_integrity;
+package org.jmdb.tutorial.messaging_integrity.history;
+
+import org.jmdb.tutorial.messaging_integrity.applications.Application;
+import org.jmdb.tutorial.messaging_integrity.applications.ApplicationHistoryRepository;
 
 public class ApplicationHistoryPublisher {
     private ApplicationHistoryRepository applicationHistoryRepository;
@@ -8,8 +11,8 @@ public class ApplicationHistoryPublisher {
     }
 
     public void publishApplicationCreated(Application application) {
-        ApplicationHistory history = new ApplicationHistory(application.getId());
-        history.addEvent(new ApplicationHistory.CreatedEvent(application.getId()));
+        History history = new History(application.getId());
+        history.addEvent(new History.CreatedEvent(application.getId()));
         applicationHistoryRepository.put(history);
 
     }

@@ -1,14 +1,14 @@
-package org.jmdb.tutorial.messaging_integrity;
+package org.jmdb.tutorial.messaging_integrity.history;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApplicationHistory {
+public class History {
 
     private final String applicationId;
     private final List<HistoryEvent> events = new ArrayList<>();
 
-    public ApplicationHistory(String applicationId) {
+    public History(String applicationId) {
         this.applicationId = applicationId;
     }
 
