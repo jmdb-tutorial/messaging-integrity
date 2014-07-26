@@ -6,4 +6,7 @@ public interface Event {
     String getTimeStamp();
     EventStatus getEventStatus();
 
+    Event changeStatusTo(EventStatus eventStatus);
+
+    String getId();
 }

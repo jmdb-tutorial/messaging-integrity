@@ -1,11 +1,13 @@
 package org.jmdb.tutorial.messaging_integrity.applications;
 
-import java.util.BitSet;
+import org.jmdb.tutorial.messaging_integrity.eventstore.Event;
+
+import java.util.List;
 
 public class InMemoryApplicationAdminRepository implements ApplicationAdminRepository {
-    private BitSet unpublishedEvents;
+    private List<Event> unpublishedEvents;
 
-    public List<> getUnpublishedEvents() {
+    public List<Event> getUnpublishedEvents() {
         return unpublishedEvents;
     }
 }
