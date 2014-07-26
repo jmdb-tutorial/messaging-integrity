@@ -7,8 +7,8 @@ public class InMemoryEventStream implements EventStream {
 
     private List<Event> events = new ArrayList<>();
 
-    @Override public <T> Event storeEvent(String userId, T data) {
-        Event event = new DataEvent<>(userId, data);
+    @Override public <T> Event storeEvent(String userId, String eventType, T data) {
+        Event event = new DataEvent<>(userId, eventType, data);
         events.add(event);
         return event;
     }

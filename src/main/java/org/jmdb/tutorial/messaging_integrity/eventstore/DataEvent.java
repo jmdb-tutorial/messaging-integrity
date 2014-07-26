@@ -12,8 +12,10 @@ public class DataEvent<T> implements Event {
     private final T data;
     private final String timeStamp;
     private final EventStatus eventStatus;
+    private String eventType;
 
-    public DataEvent(String userId, T data) {
+    public DataEvent(String userId, String eventType, T data) {
+        this.eventType = eventType;
         this.eventId = randomUUID().toString();
         this.userId = userId;
         this.data = data;

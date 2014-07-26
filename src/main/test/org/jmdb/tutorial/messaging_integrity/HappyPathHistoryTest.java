@@ -29,13 +29,14 @@ public class HappyPathHistoryTest {
     @Before
     public void setUp() {
         EventStore eventStore = new InMemoryEventStore();
-        applicationRepository = new ApplicationRepository(eventStore);
-        applicationAdminRepository = new ApplicationAdminRepository(eventStore);
 
         historyRepository = new InMemoryHistoryRepository();
         ApplicationHistoryPublisher publisher = new ApplicationHistoryPublisher(historyRepository);
 
-        ApplicationRequestProcessor applicationRequestProcessor = new ApplicationRequestProcessor(applicationRepository, publisher);
+        applicationRepository = new ApplicationRepository(eventStore, publisher);
+        applicationAdminRepository = new ApplicationAdminRepository(eventStore);
+
+        ApplicationRequestProcessor applicationRequestProcessor = new ApplicationRequestProcessor(applicationRepository);
 
         CreateApplicationRequest createApplicationRequest = createApplicationRequest()
                 .withId("APP-001")
@@ -54,14 +55,14 @@ public class HappyPathHistoryTest {
     }
 
     @Test
-    public void all_history_events_are_published() {
+    public void events_appear_in_the_history() {
         History history = historyRepository.getByApplicationId("APP-001");
 
         assertThat(history.getEvents().size(), equalTo(1));
     }
 
     @Test
-    public void all_events_are_published() {
+    public void all_events_are_marked_as_published() {
         assertThat(applicationAdminRepository.filterEventsByStatus("APP-001", PUBLISHED).size(), equalTo(1));
     }
 }

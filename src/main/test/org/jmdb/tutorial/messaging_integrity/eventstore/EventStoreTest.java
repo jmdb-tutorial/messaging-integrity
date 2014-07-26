@@ -17,7 +17,7 @@ public class EventStoreTest {
         EventStore eventStore = new InMemoryEventStore();
 
         eventStream = eventStore.eventStreamFor("DOMAIN-ID-01");
-        eventAsRecorded = eventStream.storeEvent("USER-01", new TestData("some data"));
+        eventAsRecorded = eventStream.storeEvent("USER-01", "some-event-type", new TestData("some data"));
     }
 
     @Test
