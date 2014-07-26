@@ -30,15 +30,16 @@ public class HistoryFailsApplicationIntegrityTest {
 
     @Before
     public void setUp() {
+        AuthorisationContext auth = new AuthorisationContext();
         EventStore eventStore = new InMemoryEventStore();
 
         historyRepository = new InMemoryHistoryRepository();
         ApplicationEventPublisher publisher = new FailingEventPublisher(historyRepository, "APP-001");
 
-        applicationRepository = new ApplicationRepository(eventStore, publisher, new AuthorisationContext());
+        applicationRepository = new ApplicationRepository(eventStore);
         applicationAdminRepository = new ApplicationAdminRepository(eventStore);
 
-        ApplicationRequestProcessor applicationRequestProcessor = new ApplicationRequestProcessor(applicationRepository);
+        ApplicationRequestProcessor applicationRequestProcessor = new ApplicationRequestProcessor(auth, eventStore, publisher);
 
         CreateApplicationRequest createApplicationRequest = createApplicationRequest()
                 .withId("APP-001")

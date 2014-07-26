@@ -16,34 +16,14 @@ public class ApplicationRepository {
     private static final Logger log = LoggerFactory.getLogger(ApplicationRepository.class);
 
     private final EventStore eventStore;
-    private final ApplicationEventPublisher messaging;
-    private AuthorisationContext auth;
 
-    public ApplicationRepository(EventStore eventStore,
-                                 ApplicationEventPublisher messaging,
-                                 AuthorisationContext auth) {
+    public ApplicationRepository(EventStore eventStore) {
         this.eventStore = eventStore;
-        this.messaging = messaging;
-        this.auth = auth;
     }
 
     public Application getById(String applicationId) {
         EventStream eventStream = eventStore.eventStreamFor(applicationId);
         return ((DataEvent<Application>)eventStream.getLastEvent()).getData();
-    }
-
-    public void create(Application application) {
-        EventStream eventStream = eventStore.eventStreamFor(application.getId());
-        Event event = eventStream.storeEvent(auth.getCurrentUserId(), "application-created", application);
-
-        try {
-            messaging.publishCreatedEvent(application);
-
-            eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
-
-        } catch (FailedToPublishException e) {
-            log.error(format("Failed to publish [application-created] for application id [%s]", application.getId()), e);
-        }
     }
 
 }

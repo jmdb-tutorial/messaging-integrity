@@ -30,14 +30,15 @@ public class HappyPathApplicationIntegrityTest {
     @Before
     public void setUp() {
         EventStore eventStore = new InMemoryEventStore();
+        AuthorisationContext auth = new AuthorisationContext();
 
         historyRepository = new InMemoryHistoryRepository();
         ApplicationEventPublisher publisher = new ApplicationEventPublisher(historyRepository);
 
-        applicationRepository = new ApplicationRepository(eventStore, publisher, new AuthorisationContext());
+        applicationRepository = new ApplicationRepository(eventStore);
         applicationAdminRepository = new ApplicationAdminRepository(eventStore);
 
-        ApplicationRequestProcessor applicationRequestProcessor = new ApplicationRequestProcessor(applicationRepository);
+        ApplicationRequestProcessor applicationRequestProcessor = new ApplicationRequestProcessor(auth, eventStore, publisher);
 
         CreateApplicationRequest createApplicationRequest = createApplicationRequest()
                 .withId("APP-001")
