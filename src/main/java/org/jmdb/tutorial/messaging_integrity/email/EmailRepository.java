@@ -10,13 +10,9 @@ import java.util.List;
 
 public class EmailRepository {
 
-
-    private AuthorisationContext auth;
     private final EventStore eventStore;
 
-    public EmailRepository(AuthorisationContext auth,
-                           EventStore eventStore) {
-        this.auth = auth;
+    public EmailRepository(EventStore eventStore) {
         this.eventStore = eventStore;
     }
 
@@ -24,12 +20,6 @@ public class EmailRepository {
     public Email get(String emailId) {
         return ((DataEvent<Email>)eventStore.getEventById(emailId)).getData();
     };
-
-    List<Email> getAllEmailsWithStatus(EmailStatus emailStatus) {
-        return null;
-    }
-
-
 
 
 }

@@ -38,7 +38,7 @@ public class HappyPathEmailIntegrityTest {
         SMTPGateway smtpGateway = new FakeSMTPGateway();
 
         EventStore eventStore = new InMemoryEventStore();
-        emailRepository = new EmailRepository(new AuthorisationContext(), eventStore);
+        emailRepository = new EmailRepository(eventStore);
         emailAdminRepository = new EmailAdminRepository(eventStore);
 
         historyRepository = new InMemoryHistoryRepository();
