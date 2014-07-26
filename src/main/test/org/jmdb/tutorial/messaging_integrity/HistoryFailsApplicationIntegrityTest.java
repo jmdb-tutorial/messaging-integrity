@@ -6,11 +6,11 @@ import org.jmdb.tutorial.messaging_integrity.applications.ApplicationHistoryPubl
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequest;
+import org.jmdb.tutorial.messaging_integrity.applications.FailedToPublishException;
 import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
 import org.jmdb.tutorial.messaging_integrity.history.History;
-import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.history.InMemoryHistoryRepository;
 import org.junit.Before;
@@ -20,7 +20,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequestBuilder.createApplicationRequest;
-import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
 import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.RECORDED;
 
 public class HistoryFailsApplicationIntegrityTest {
@@ -45,12 +44,8 @@ public class HistoryFailsApplicationIntegrityTest {
                 .withId("APP-001")
                 .build();
 
-        try {
-            applicationRequestProcessor.processRequest(createApplicationRequest);
-        } catch (FailedToPublishException e) {
-            // we expect this to happen, and want to examine our state afterwards.
-        }
 
+        applicationRequestProcessor.processRequest(createApplicationRequest);
     }
 
     @Test
@@ -92,9 +87,4 @@ public class HistoryFailsApplicationIntegrityTest {
 
     }
 
-    private static class FailedToPublishException extends RuntimeException {
-        private FailedToPublishException() {
-            super("BANG! we failed to reach the messagebroker!");
-        }
-    }
 }
