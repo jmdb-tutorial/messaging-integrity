@@ -21,7 +21,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequestBuilder.createApplicationRequest;
 import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
 
-public class HappyPathHistoryTest {
+public class HappyPathApplicationIntegrityTest {
 
     private HistoryRepository historyRepository;
     private ApplicationRepository applicationRepository;
