@@ -27,7 +27,7 @@ public class EventStoreTest {
 
     @Test
     public void can_change_status() {
-        eventStream.changeStatusOfEvent(eventAsRecorded.getId(), CustomEventStatus.EMAIL_SENT);
+        eventStream.updateStatusOfEvent(eventAsRecorded.getId(), CustomEventStatus.EMAIL_SENT);
 
         Event lastEvent = eventStream.getLastEvent();
 

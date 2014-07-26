@@ -31,9 +31,9 @@ public class ApplicationRepository {
         EventStream eventStream = eventStore.eventStreamFor(application.getId());
         Event event = eventStream.storeEvent(auth.getCurrentUserId(), "application-created", application);
 
-        this.applicationHistoryPublisher.publishApplicationCreated(application);
+        applicationHistoryPublisher.publishApplicationCreated(application);
 
-        eventStream.changeStatusOfEvent(event.getId(), PUBLISHED);
+        eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
     }
 
 }

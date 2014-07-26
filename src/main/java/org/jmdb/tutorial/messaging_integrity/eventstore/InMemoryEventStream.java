@@ -13,7 +13,7 @@ public class InMemoryEventStream implements EventStream {
         return event;
     }
 
-    @Override public Event changeStatusOfEvent(String eventId, EventStatus newStatus) {
+    @Override public Event updateStatusOfEvent(String eventId, EventStatus newStatus) {
         int indexOfEvent = indexOfEvent(eventId);
         Event event = events.get(indexOfEvent);
 
