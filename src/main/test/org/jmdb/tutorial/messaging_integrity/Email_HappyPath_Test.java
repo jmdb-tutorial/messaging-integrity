@@ -25,7 +25,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
 
-public class HappyPathEmailIntegrityTest {
+public class Email_HappyPath_Test {
 
     private HistoryRepository historyRepository;
     private EmailAdminRepository emailAdminRepository;
