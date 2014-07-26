@@ -19,7 +19,7 @@ public class ApplicationAdminRepository {
         this.eventStore = eventStore;
     }
 
-    public List<Event> filterEventsByStatus(String applicationId, final EventStatus status) {
+    public List<Event> getApplicationEventsByStatus(String applicationId, final EventStatus status) {
         EventStream eventStream = this.eventStore.eventStreamFor(applicationId);
 
         return eventStream.filterEvents(new EventStreamFilter() {
