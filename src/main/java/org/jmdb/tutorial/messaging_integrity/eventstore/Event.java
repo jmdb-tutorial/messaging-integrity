@@ -9,4 +9,7 @@ public interface Event {
     Event changeStatusTo(EventStatus eventStatus);
 
     String getId();
+
+
+
 }

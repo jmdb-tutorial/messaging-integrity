@@ -1,11 +1,9 @@
 package org.jmdb.tutorial.messaging_integrity.history;
 
-import org.jmdb.tutorial.messaging_integrity.applications.ApplicationHistoryRepository;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryHistoryRepository implements ApplicationHistoryRepository {
+public class InMemoryHistoryRepository implements HistoryRepository {
 
     private final Map<String, History> histories = new HashMap<>();
 

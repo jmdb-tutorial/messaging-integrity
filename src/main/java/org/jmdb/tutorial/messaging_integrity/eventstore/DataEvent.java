@@ -50,4 +50,8 @@ public class DataEvent<T> implements Event {
     @Override public String getId() {
         return eventId;
     }
+
+    public T getData() {
+        return this.data;
+    }
 }

@@ -32,6 +32,18 @@ public class InMemoryEventStream implements EventStream {
         return events.get(events.size() - 1);
     }
 
+    @Override public List<Event> filterEvents(EventStreamFilter eventStreamFilter) {
+        List<Event> matchingEvents = new ArrayList<>();
+
+        for (Event event : events) {
+            if (eventStreamFilter.accept(event)) {
+                matchingEvents.add(event);
+            }
+
+        }
+        return matchingEvents;
+    }
+
     private int indexOfEvent(String eventId) {
         int i = 0;
         for (Event event : events) {
