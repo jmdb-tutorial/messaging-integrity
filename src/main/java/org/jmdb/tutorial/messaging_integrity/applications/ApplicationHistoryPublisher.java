@@ -11,7 +11,7 @@ public class ApplicationHistoryPublisher {
         this.historyRepository = historyRepository;
     }
 
-    public void publishApplicationCreated(Application application) {
+    public void publishCreatedEvent(Application application) {
         History history = new History(application.getId());
         history.addEvent(new History.CreatedEvent(application.getId()));
         historyRepository.put(history);

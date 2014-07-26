@@ -16,14 +16,14 @@ public class ApplicationRepository {
     private static final Logger log = LoggerFactory.getLogger(ApplicationRepository.class);
 
     private final EventStore eventStore;
-    private final ApplicationHistoryPublisher applicationHistoryPublisher;
+    private final ApplicationHistoryPublisher applicationHistory;
     private AuthorisationContext auth;
 
     public ApplicationRepository(EventStore eventStore,
-                                 ApplicationHistoryPublisher applicationHistoryPublisher,
+                                 ApplicationHistoryPublisher applicationHistory,
                                  AuthorisationContext auth) {
         this.eventStore = eventStore;
-        this.applicationHistoryPublisher = applicationHistoryPublisher;
+        this.applicationHistory = applicationHistory;
         this.auth = auth;
     }
 
@@ -37,7 +37,7 @@ public class ApplicationRepository {
         Event event = eventStream.storeEvent(auth.getCurrentUserId(), "application-created", application);
 
         try {
-            applicationHistoryPublisher.publishApplicationCreated(application);
+            applicationHistory.publishCreatedEvent(application);
 
             eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
 

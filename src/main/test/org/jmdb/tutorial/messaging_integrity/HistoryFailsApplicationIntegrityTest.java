@@ -77,11 +77,11 @@ public class HistoryFailsApplicationIntegrityTest {
             this.idToFailOn = idToFailOn;
         }
 
-        @Override public void publishApplicationCreated(Application application) {
+        @Override public void publishCreatedEvent(Application application) {
             if (idToFailOn.equals(application.getId())) {
                 throw new FailedToPublishException();
             }
-            super.publishApplicationCreated(application);
+            super.publishCreatedEvent(application);
         }
 
 
