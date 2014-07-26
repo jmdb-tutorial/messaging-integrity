@@ -3,18 +3,21 @@ package org.jmdb.tutorial.messaging_integrity;
 import org.jmdb.tutorial.messaging_integrity.applications.Application;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationAdminRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationEventPublisher;
-import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
-import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
-import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
-import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequest;
+import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
+import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
+import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
+import org.jmdb.tutorial.messaging_integrity.history.ApplicationHistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.History;
+import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
+import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.history.InMemoryHistoryRepository;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -61,7 +64,9 @@ public class HappyPathApplicationIntegrityTest {
     public void events_appear_in_the_history() {
         History history = historyRepository.getByCustomerId("CUST-001");
 
-        assertThat(history.getEvents().size(), equalTo(1));
+        List<ApplicationHistoryEvent> applicationEvents = history.getApplicationEvents();
+
+        assertThat(applicationEvents.size(), equalTo(1));
 
         HistoryEvent historyEvent = history.getEvents().get(0);
         assertThat(historyEvent.getEventType(), equalTo("application-created") );
