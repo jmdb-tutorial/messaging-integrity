@@ -5,26 +5,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Email {
-    private String id;
+    private String customerId;
     private final String address;
     private final String template;
     private final Map<String, String> data;
     private final EmailStatus emailStatus;
 
-    public Email(String id, String address, String template, Map<String, String> data) {
-        this.id = id;
+    public Email(String customerId, String address, String template, Map<String, String> data) {
+        this.customerId = customerId;
         this.address = address;
         this.template = template;
         this.data = data;
         this.emailStatus = EmailStatus.RECORDED;
     }
 
-    private Email(String id, String address, String template,
+    private Email(String customerId, String address, String template,
                   HashMap<String, String> data,
                   EmailStatus emailStatus) {
-
-
-        this.id = id;
+        this.customerId = customerId;
         this.address = address;
         this.template = template;
         this.data = data;
@@ -32,13 +30,9 @@ public class Email {
     }
 
     public Email changeEmailStatus(EmailStatus newStatus) {
-        return new Email(id, address, template, new HashMap<>(data), newStatus);
+        return new Email(customerId, address, template, new HashMap<>(data), newStatus);
     }
 
-
-    public String getId() {
-        return id;
-    }
 
     public String getAddress() {
         return address;
@@ -54,5 +48,9 @@ public class Email {
 
     public EmailStatus getEmailStatus() {
         return emailStatus;
+    }
+
+    public String getCustomerId() {
+        return customerId;
     }
 }

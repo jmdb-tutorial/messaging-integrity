@@ -57,7 +57,7 @@ public class HistoryFailsApplicationIntegrityTest {
 
     @Test
     public void events_do_not_appear_in_the_history() {
-        History history = historyRepository.getByApplicationId("APP-001");
+        History history = historyRepository.getByCustomerId("APP-001");
 
         assertThat(history, nullValue());
     }

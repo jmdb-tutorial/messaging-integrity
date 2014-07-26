@@ -20,7 +20,7 @@ public class History {
        events.add(createdEvent);
     }
 
-    public String getApplicationId() {
+    public String getCustomerId() {
         return applicationId;
     }
 

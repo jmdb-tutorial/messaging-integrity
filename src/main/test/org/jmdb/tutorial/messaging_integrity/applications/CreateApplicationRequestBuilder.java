@@ -2,6 +2,7 @@ package org.jmdb.tutorial.messaging_integrity.applications;
 
 public class CreateApplicationRequestBuilder {
     private String id;
+    private String customerId;
 
     public static CreateApplicationRequestBuilder createApplicationRequest() {
         return new CreateApplicationRequestBuilder();
@@ -12,8 +13,13 @@ public class CreateApplicationRequestBuilder {
         return this;
     }
 
+    public CreateApplicationRequestBuilder withCustomerId(String customerId) {
+        this.customerId = id;
+        return this;
+    }
+
     public CreateApplicationRequest build() {
-        return new CreateApplicationRequest(id);
+        return new CreateApplicationRequest(id, customerId);
     }
 
 }

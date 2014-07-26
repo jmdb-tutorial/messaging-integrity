@@ -5,11 +5,19 @@ import java.util.List;
 
 public class InMemoryEventStream implements EventStream {
 
-    private List<Event> events = new ArrayList<>();
+    private final List<Event> events = new ArrayList<>();
+    private final InMemoryEventStore parentStore;
+
+    public InMemoryEventStream(InMemoryEventStore parentStore) {
+        this.parentStore = parentStore;
+    }
 
     @Override public <T> Event storeEvent(String userId, String eventType, T data) {
         Event event = new DataEvent<>(userId, eventType, data);
         events.add(event);
+
+        parentStore.registerEvent(event);
+
         return event;
     }
 
@@ -42,6 +50,14 @@ public class InMemoryEventStream implements EventStream {
 
         }
         return matchingEvents;
+    }
+
+    @Override public List<Event> getEventsWithStatus(final EventStatus status) {
+        return filterEvents(new EventStreamFilter() {
+            @Override public boolean accept(Event event) {
+                return status.equals(event.getEventStatus());
+            }
+        });
     }
 
     private int indexOfEvent(String eventId) {

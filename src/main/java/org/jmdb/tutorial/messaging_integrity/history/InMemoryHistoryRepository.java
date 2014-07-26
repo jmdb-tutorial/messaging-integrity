@@ -7,12 +7,12 @@ public class InMemoryHistoryRepository implements HistoryRepository {
 
     private final Map<String, History> histories = new HashMap<>();
 
-    @Override public History getByApplicationId(String applicationId) {
-        return histories.get(applicationId);
+    @Override public History getByCustomerId(String customerId) {
+        return histories.get(customerId);
     }
 
 
     @Override public void put(History history) {
-        histories.put(history.getApplicationId(), history);
+        histories.put(history.getCustomerId(), history);
     }
 }

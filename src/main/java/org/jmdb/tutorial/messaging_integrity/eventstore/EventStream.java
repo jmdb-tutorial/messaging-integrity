@@ -10,4 +10,6 @@ public interface EventStream {
     Event getLastEvent();
 
     List<Event> filterEvents(EventStreamFilter eventStreamFilter);
+
+    List<Event> getEventsWithStatus(EventStatus status);
 }
