@@ -14,7 +14,7 @@ public class CreateApplicationRequestBuilder {
     }
 
     public CreateApplicationRequestBuilder withCustomerId(String customerId) {
-        this.customerId = id;
+        this.customerId = customerId;
         return this;
     }
 

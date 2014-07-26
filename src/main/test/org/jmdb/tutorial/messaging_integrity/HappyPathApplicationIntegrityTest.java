@@ -58,7 +58,7 @@ public class HappyPathApplicationIntegrityTest {
 
     @Test
     public void events_appear_in_the_history() {
-        History history = historyRepository.getByCustomerId("APP-001");
+        History history = historyRepository.getByCustomerId("CUST-001");
 
         assertThat(history.getEvents().size(), equalTo(1));
 

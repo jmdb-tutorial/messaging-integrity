@@ -3,9 +3,9 @@ package org.jmdb.tutorial.messaging_integrity.applications;
 import org.jmdb.tutorial.messaging_integrity.history.History;
 
 public class Application {
-    private History history;
-    private String id;
-    private String customerId;
+
+    private final String id;
+    private final String customerId;
 
     public Application(String id, String customerId) {
         this.id = id;

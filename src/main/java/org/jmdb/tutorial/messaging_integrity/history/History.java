@@ -5,11 +5,11 @@ import java.util.List;
 
 public class History {
 
-    private final String applicationId;
+    private final String customerId;
     private final List<HistoryEvent> events = new ArrayList<>();
 
-    public History(String applicationId) {
-        this.applicationId = applicationId;
+    public History(String customerId) {
+        this.customerId = customerId;
     }
 
     public boolean hasEvents() {
@@ -21,7 +21,7 @@ public class History {
     }
 
     public String getCustomerId() {
-        return applicationId;
+        return customerId;
     }
 
     public List<HistoryEvent> getEvents() {
