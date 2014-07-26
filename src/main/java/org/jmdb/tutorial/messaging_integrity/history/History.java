@@ -29,8 +29,13 @@ public class History {
     }
 
     public static class CreatedEvent implements HistoryEvent {
-        public CreatedEvent(String id) {
+        private String eventType = "application-created";
 
+        public CreatedEvent(String id) {
+        }
+
+        @Override public String getEventType() {
+            return eventType;
         }
     }
 }

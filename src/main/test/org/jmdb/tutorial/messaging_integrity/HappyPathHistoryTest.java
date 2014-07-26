@@ -6,6 +6,7 @@ import org.jmdb.tutorial.messaging_integrity.applications.ApplicationHistoryPubl
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus;
+import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRequestProcessor;
@@ -59,10 +60,15 @@ public class HappyPathHistoryTest {
         History history = historyRepository.getByApplicationId("APP-001");
 
         assertThat(history.getEvents().size(), equalTo(1));
+
+        HistoryEvent historyEvent = history.getEvents().get(0);
+        assertThat(historyEvent.getEventType(), equalTo("application-created") );
     }
 
     @Test
     public void all_events_are_marked_as_published() {
         assertThat(applicationAdminRepository.filterEventsByStatus("APP-001", PUBLISHED).size(), equalTo(1));
     }
+
+
 }
