@@ -4,15 +4,17 @@ import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.eventstore.Event;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStream;
-import org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-import static java.util.UUID.randomUUID;
+import static java.lang.String.format;
 import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
 
 public class EmailRequestProcessor {
 
+    private static final Logger log = LoggerFactory.getLogger(EmailRequestProcessor.class);
 
     private final AuthorisationContext auth;
     private final EventStore eventStore;
@@ -37,13 +39,19 @@ public class EmailRequestProcessor {
         Event event = eventStream.storeEvent(auth.getCurrentUserId(), "send-email", email);
 
 
-        smtpGateway.sendEmail(email);
+        try {
+            smtpGateway.sendEmail(email);
 
 
-        messaging.publishEmailSentEvent(email);
+            messaging.publishEmailSentEvent(email);
 
-        eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
+            eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
+
+        } catch (FailedToSendEmailException fse) {
+            log.error(format("SMTP Gateway failed whilst sending email to [%s]", emailAddress), fse);
+        }
 
         return event.getId();
+
     }
 }
