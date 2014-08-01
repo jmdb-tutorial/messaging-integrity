@@ -13,7 +13,7 @@ public class InMemoryEventStream implements EventStream {
     }
 
     @Override public <T> Event storeEvent(String userId, String eventType, T data) {
-        Event event = new DataEvent<>(userId, eventType, data);
+        Event<T> event = new Event<>(userId, eventType, data);
         events.add(event);
 
         parentStore.registerEvent(event);

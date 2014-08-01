@@ -1,6 +1,5 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
-import org.jmdb.tutorial.messaging_integrity.platform.eventstore.DataEvent;
 import org.jmdb.tutorial.messaging_integrity.platform.eventstore.Event;
 import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStatus;
 import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
@@ -20,8 +19,8 @@ public class EmailAdminRepository {
 
         List<Email> emails = new ArrayList<>();
 
-        for (Event event : events) {
-            emails.add(((DataEvent<Email>)event).getData());
+        for (Event<Email> event : events) {
+            emails.add(event.getPayload());
         }
 
         return  emails;

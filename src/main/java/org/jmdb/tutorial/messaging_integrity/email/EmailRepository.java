@@ -1,6 +1,6 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
-import org.jmdb.tutorial.messaging_integrity.platform.eventstore.DataEvent;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.Event;
 import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
 
 public class EmailRepository {
@@ -13,7 +13,8 @@ public class EmailRepository {
 
 
     public Email get(String emailId) {
-        return ((DataEvent<Email>)eventStore.getEventById(emailId)).getData();
+        Event<Email> event = eventStore.getEventById(emailId);
+        return event.getPayload();
     };
 
 

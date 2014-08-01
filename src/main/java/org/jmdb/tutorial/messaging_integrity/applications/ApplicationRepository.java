@@ -1,12 +1,10 @@
 package org.jmdb.tutorial.messaging_integrity.applications;
 
-import org.jmdb.tutorial.messaging_integrity.platform.eventstore.DataEvent;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.Event;
 import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static java.lang.String.format;
 
 public class ApplicationRepository {
 
@@ -20,7 +18,8 @@ public class ApplicationRepository {
 
     public Application getById(String applicationId) {
         EventStream eventStream = eventStore.eventStreamFor(applicationId);
-        return ((DataEvent<Application>)eventStream.getLastEvent()).getData();
+        Event<Application> lastEvent = eventStream.getLastEvent();
+        return lastEvent.getPayload();
     }
 
 }
