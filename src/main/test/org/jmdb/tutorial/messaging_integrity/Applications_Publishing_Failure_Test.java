@@ -53,7 +53,7 @@ public class Applications_Publishing_Failure_Test {
     public void application_is_stored() {
         Application application = applicationRepository.getById("APP-001");
 
-        assertThat(application.getId(), equalTo("APP-001"));
+        assertThat(application.id, equalTo("APP-001"));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class Applications_Publishing_Failure_Test {
         }
 
         @Override public void publishCreatedEvent(Application application) {
-            if (idToFailOn.equals(application.getId())) {
+            if (idToFailOn.equals(application.id)) {
                 throw new FailedToPublishException();
             }
             super.publishCreatedEvent(application);

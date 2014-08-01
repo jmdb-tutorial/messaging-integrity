@@ -57,7 +57,7 @@ public class Applications_HappyPath_Test {
     public void application_is_stored() {
         Application application = applicationRepository.getById("APP-001");
 
-        assertThat(application.getId(), equalTo("APP-001"));
+        assertThat(application.id, equalTo("APP-001"));
     }
 
     @Test

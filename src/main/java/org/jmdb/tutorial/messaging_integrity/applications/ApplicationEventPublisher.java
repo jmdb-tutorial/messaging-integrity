@@ -14,8 +14,8 @@ public class ApplicationEventPublisher {
     }
 
     public void publishCreatedEvent(Application application) {
-        History history = new History(application.getCustomerId());
-        history.addEvent(new ApplicationHistoryEvent("application-created", application.getId()));
+        History history = new History(application.customerId);
+        history.addEvent(new ApplicationHistoryEvent("application-created", application.id));
         historyRepository.put(history);
 
     }

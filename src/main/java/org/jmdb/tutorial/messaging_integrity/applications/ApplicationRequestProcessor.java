@@ -28,7 +28,7 @@ public class ApplicationRequestProcessor {
     public void processRequest(CreateApplicationRequest request) {
         Application application = request.toApplication();
 
-        EventStream eventStream = eventStore.eventStreamFor(application.getId());
+        EventStream eventStream = eventStore.eventStreamFor(application.id);
         Event event = eventStream.storeEvent(auth.getCurrentUserId(), "application-created", application);
 
         try {
@@ -37,7 +37,7 @@ public class ApplicationRequestProcessor {
             eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
 
         } catch (FailedToPublishException e) {
-            log.error(format("Failed to publish [application-created] for application id [%s]", application.getId()), e);
+            log.error(format("Failed to publish [application-created] for application id [%s]", application.id), e);
         }
 
     }
