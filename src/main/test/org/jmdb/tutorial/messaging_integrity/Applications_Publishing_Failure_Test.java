@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequestBuilder.createApplicationRequest;
 import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.RECORDED;
 
-public class Applications_Failure_Test {
+public class Applications_Publishing_Failure_Test {
 
     private HistoryRepository historyRepository;
     private ApplicationRepository applicationRepository;

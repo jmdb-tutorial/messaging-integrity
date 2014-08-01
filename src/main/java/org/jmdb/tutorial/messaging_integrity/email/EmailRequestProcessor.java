@@ -1,5 +1,6 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
+import org.jmdb.tutorial.messaging_integrity.applications.FailedToPublishException;
 import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.eventstore.Event;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
@@ -42,13 +43,14 @@ public class EmailRequestProcessor {
         try {
             smtpGateway.sendEmail(email);
 
-
             messaging.publishEmailSentEvent(email);
 
             eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
 
-        } catch (FailedToSendEmailException fse) {
-            log.error(format("SMTP Gateway failed whilst sending email to [%s]", emailAddress), fse);
+        } catch (FailedToSendEmailException e) {
+            log.error(format("SMTP Gateway failed whilst sending email to [%s]", emailAddress), e);
+        } catch (FailedToPublishException e)  {
+            log.error(format("Failed to publish email event sending to [%s]", emailAddress), e);
         }
 
         return event.getId();
