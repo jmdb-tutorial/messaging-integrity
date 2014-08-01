@@ -24,7 +24,7 @@ public class Event<T> {
     }
 
     private Event(String eventId, String eventType, String userId,
-                      T payload, String timeStamp, EventStatus newEventStatus) {
+                  T payload, String timeStamp, EventStatus newEventStatus) {
         this.eventType = eventType;
         this.eventId = eventId;
         this.userId = userId;
