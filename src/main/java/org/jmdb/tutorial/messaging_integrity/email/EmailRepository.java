@@ -14,7 +14,7 @@ public class EmailRepository {
 
     public Email get(String emailId) {
         Event<Email> event = eventStore.getEventById(emailId);
-        return event.getPayload();
+        return event.payload;
     };
 
 

@@ -44,11 +44,11 @@ public class EmailRequestProcessor {
         try {
             smtpGateway.sendEmail(email);
 
-            eventStream.updateStatusOfEvent(event.getId(), SENT);
+            eventStream.updateStatusOfEvent(event.eventId, SENT);
 
             emailEventQueue.publishEmailSent(email);
 
-            eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
+            eventStream.updateStatusOfEvent(event.eventId, PUBLISHED);
 
         } catch (FailedToSendEmailException e) {
             log.error(format("SMTP Gateway failed whilst sending email to [%s]", emailAddress), e);
@@ -56,7 +56,7 @@ public class EmailRequestProcessor {
             log.error(format("Failed to publish email event sending to [%s]", emailAddress), e);
         }
 
-        return event.getId();
+        return event.eventId;
 
     }
 }

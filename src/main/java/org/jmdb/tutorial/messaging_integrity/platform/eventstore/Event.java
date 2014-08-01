@@ -34,28 +34,8 @@ public class Event<T> {
     }
 
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public EventStatus getEventStatus() {
-        return eventStatus;
-    }
-
     public Event changeStatusTo(EventStatus newEventStatus) {
         return new Event(eventId, eventType, userId, payload, timeStamp, newEventStatus);
-    }
-
-    public String getId() {
-        return eventId;
-    }
-
-    public T getPayload() {
-        return this.payload;
     }
 
 

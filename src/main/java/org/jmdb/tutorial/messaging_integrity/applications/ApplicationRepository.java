@@ -19,7 +19,7 @@ public class ApplicationRepository {
     public Application getById(String applicationId) {
         EventStream eventStream = eventStore.eventStreamFor(applicationId);
         Event<Application> lastEvent = eventStream.getLastEvent();
-        return lastEvent.getPayload();
+        return lastEvent.payload;
     }
 
 }

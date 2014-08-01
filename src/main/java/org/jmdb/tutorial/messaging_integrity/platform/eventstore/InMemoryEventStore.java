@@ -35,6 +35,6 @@ public class InMemoryEventStore implements EventStore {
     }
 
     void registerEvent(Event event) {
-         eventIndex.put(event.getId(), event);
+        eventIndex.put(event.eventId, event);
     }
 }

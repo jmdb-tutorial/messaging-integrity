@@ -34,7 +34,7 @@ public class ApplicationRequestProcessor {
         try {
             applicationEventQueue.publishApplicationCreated(application);
 
-            eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
+            eventStream.updateStatusOfEvent(event.eventId, PUBLISHED);
 
         } catch (FailedToPublishException e) {
             log.error(format("Failed to publish [application-created] for application id [%s]", application.id), e);

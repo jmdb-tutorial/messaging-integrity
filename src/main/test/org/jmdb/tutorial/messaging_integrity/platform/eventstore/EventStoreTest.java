@@ -22,16 +22,16 @@ public class EventStoreTest {
 
     @Test
     public void has_status_of_recorded_when_first_stored() {
-        assertThat(eventAsRecorded.getEventStatus(), sameInstance((EventStatus)RECORDED));
+        assertThat(eventAsRecorded.eventStatus, sameInstance((EventStatus)RECORDED));
     }
 
     @Test
     public void can_change_status() {
-        eventStream.updateStatusOfEvent(eventAsRecorded.getId(), CustomEventStatus.EMAIL_SENT);
+        eventStream.updateStatusOfEvent(eventAsRecorded.eventId, CustomEventStatus.EMAIL_SENT);
 
         Event lastEvent = eventStream.getLastEvent();
 
-        assertThat(lastEvent.getEventStatus(), sameInstance((EventStatus)CustomEventStatus.EMAIL_SENT));
+        assertThat(lastEvent.eventStatus, sameInstance((EventStatus)CustomEventStatus.EMAIL_SENT));
     }
 
     private static enum CustomEventStatus implements EventStatus {

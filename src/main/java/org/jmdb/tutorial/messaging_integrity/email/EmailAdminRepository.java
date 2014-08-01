@@ -20,7 +20,7 @@ public class EmailAdminRepository {
         List<Email> emails = new ArrayList<>();
 
         for (Event<Email> event : events) {
-            emails.add(event.getPayload());
+            emails.add(event.payload);
         }
 
         return  emails;

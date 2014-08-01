@@ -55,7 +55,7 @@ public class InMemoryEventStream implements EventStream {
     @Override public List<Event> getEventsWithStatus(final EventStatus status) {
         return filterEvents(new EventStreamFilter() {
             @Override public boolean accept(Event event) {
-                return status.equals(event.getEventStatus());
+                return status.equals(event.eventStatus);
             }
         });
     }
@@ -63,7 +63,7 @@ public class InMemoryEventStream implements EventStream {
     private int indexOfEvent(String eventId) {
         int i = 0;
         for (Event event : events) {
-            if (eventId.equals(event.getId())) {
+            if (eventId.equals(event.eventId)) {
                 return i;
             }
             ++i;
