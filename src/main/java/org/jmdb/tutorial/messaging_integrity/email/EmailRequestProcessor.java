@@ -1,10 +1,10 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
 import org.jmdb.tutorial.messaging_integrity.applications.FailedToPublishException;
-import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
-import org.jmdb.tutorial.messaging_integrity.eventstore.Event;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStream;
+import org.jmdb.tutorial.messaging_integrity.platform.auth.AuthorisationContext;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.Event;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static java.lang.String.format;
 import static org.jmdb.tutorial.messaging_integrity.email.EmailStatus.SENT;
-import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
+import static org.jmdb.tutorial.messaging_integrity.platform.eventstore.StandardEventStatus.PUBLISHED;
 
 public class EmailRequestProcessor {
 

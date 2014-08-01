@@ -1,9 +1,5 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
-import org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus;
-
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Email {

@@ -1,11 +1,11 @@
-package org.jmdb.tutorial.messaging_integrity.eventstore;
+package org.jmdb.tutorial.messaging_integrity.platform.eventstore;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsSame.sameInstance;
-import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.RECORDED;
+import static org.jmdb.tutorial.messaging_integrity.platform.eventstore.StandardEventStatus.RECORDED;
 
 public class EventStoreTest {
 

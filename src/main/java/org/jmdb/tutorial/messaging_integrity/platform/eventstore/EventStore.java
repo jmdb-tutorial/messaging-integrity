@@ -1,6 +1,4 @@
-package org.jmdb.tutorial.messaging_integrity.eventstore;
-
-import org.jmdb.tutorial.messaging_integrity.email.Email;
+package org.jmdb.tutorial.messaging_integrity.platform.eventstore;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package org.jmdb.tutorial.messaging_integrity;
 
 import org.jmdb.tutorial.messaging_integrity.applications.FailedToPublishException;
-import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
+import org.jmdb.tutorial.messaging_integrity.platform.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.email.Email;
 import org.jmdb.tutorial.messaging_integrity.email.EmailAdminRepository;
 import org.jmdb.tutorial.messaging_integrity.email.EmailEventQueue;
@@ -9,8 +9,8 @@ import org.jmdb.tutorial.messaging_integrity.email.EmailRepository;
 import org.jmdb.tutorial.messaging_integrity.email.EmailRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.email.FakeSMTPGateway;
 import org.jmdb.tutorial.messaging_integrity.email.SMTPGateway;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
-import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.InMemoryEventStore;
 import org.jmdb.tutorial.messaging_integrity.history.History;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.history.InMemoryHistoryRepository;

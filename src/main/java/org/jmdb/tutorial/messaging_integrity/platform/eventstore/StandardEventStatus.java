@@ -1,4 +1,4 @@
-package org.jmdb.tutorial.messaging_integrity.eventstore;
+package org.jmdb.tutorial.messaging_integrity.platform.eventstore;
 
 public enum StandardEventStatus implements EventStatus {
     RECORDED("recorded"),

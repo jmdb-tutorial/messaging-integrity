@@ -1,12 +1,7 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
-import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
-import org.jmdb.tutorial.messaging_integrity.eventstore.DataEvent;
-import org.jmdb.tutorial.messaging_integrity.eventstore.Event;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStream;
-
-import java.util.List;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.DataEvent;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
 
 public class EmailRepository {
 

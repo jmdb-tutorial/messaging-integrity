@@ -1,9 +1,9 @@
-package org.jmdb.tutorial.messaging_integrity.eventstore;
+package org.jmdb.tutorial.messaging_integrity.platform.eventstore;
 
 import java.util.Date;
 
 import static java.util.UUID.*;
-import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.RECORDED;
+import static org.jmdb.tutorial.messaging_integrity.platform.eventstore.StandardEventStatus.RECORDED;
 
 public class DataEvent<T> implements Event {
 

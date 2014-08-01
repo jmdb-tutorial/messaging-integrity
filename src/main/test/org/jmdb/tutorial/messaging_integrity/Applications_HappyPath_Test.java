@@ -6,9 +6,9 @@ import org.jmdb.tutorial.messaging_integrity.applications.ApplicationEventQueue;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequest;
-import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
-import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
+import org.jmdb.tutorial.messaging_integrity.platform.auth.AuthorisationContext;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.InMemoryEventStore;
 import org.jmdb.tutorial.messaging_integrity.history.ApplicationHistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.History;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
@@ -22,7 +22,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequestBuilder.createApplicationRequest;
-import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
+import static org.jmdb.tutorial.messaging_integrity.platform.eventstore.StandardEventStatus.PUBLISHED;
 
 public class Applications_HappyPath_Test {
 

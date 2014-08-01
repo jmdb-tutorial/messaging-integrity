@@ -1,4 +1,4 @@
-package org.jmdb.tutorial.messaging_integrity.auth;
+package org.jmdb.tutorial.messaging_integrity.platform.auth;
 
 public class AuthorisationContext {
 

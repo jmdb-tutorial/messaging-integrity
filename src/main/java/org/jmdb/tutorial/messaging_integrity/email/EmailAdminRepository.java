@@ -1,9 +1,9 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
-import org.jmdb.tutorial.messaging_integrity.eventstore.DataEvent;
-import org.jmdb.tutorial.messaging_integrity.eventstore.Event;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStatus;
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.DataEvent;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.Event;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStatus;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStore;
 
 import java.util.ArrayList;
 import java.util.List;

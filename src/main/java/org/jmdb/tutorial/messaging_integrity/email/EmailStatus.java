@@ -1,6 +1,6 @@
 package org.jmdb.tutorial.messaging_integrity.email;
 
-import org.jmdb.tutorial.messaging_integrity.eventstore.EventStatus;
+import org.jmdb.tutorial.messaging_integrity.platform.eventstore.EventStatus;
 
 public enum EmailStatus implements EventStatus {
     SENT("sent");
