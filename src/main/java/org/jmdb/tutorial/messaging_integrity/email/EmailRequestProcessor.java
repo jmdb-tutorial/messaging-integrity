@@ -37,8 +37,8 @@ public class EmailRequestProcessor {
     public String sendEmail(String customerId, String emailAddress, String templateName, Map<String, String> data) {
         Email email = new Email(customerId, emailAddress, templateName, data);
 
-        EventStream eventStream = eventStore.eventStreamFor(email.getAddress());
-        Event event = eventStream.storeEvent(auth.getCurrentUserId(), "send-email", email);
+        EventStream eventStream = eventStore.eventStreamFor(email.address);
+        Event event = eventStream.storeEvent(auth.currentUserId(), "send-email", email);
 
 
         try {

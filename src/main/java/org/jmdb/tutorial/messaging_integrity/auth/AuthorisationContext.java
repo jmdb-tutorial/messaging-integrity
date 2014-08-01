@@ -2,11 +2,11 @@ package org.jmdb.tutorial.messaging_integrity.auth;
 
 public class AuthorisationContext {
 
-    public User getCurrentUser() {
+    public User currentUser() {
         return new User("xxxxxx", "Xx. Xxxxx Xxxxx");
     }
 
-    public String getCurrentUserId() {
-        return getCurrentUser().getUserId();
+    public String currentUserId() {
+        return currentUser().userId;
     }
 }

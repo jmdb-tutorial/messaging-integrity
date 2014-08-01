@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Email {
-    private String customerId;
-    private final String address;
-    private final String template;
-    private final Map<String, String> data;
+    public String customerId;
+    public final String address;
+    public final String template;
+    public final Map<String, String> data;
 
     public Email(String customerId, String address, String template, Map<String, String> data) {
         this.customerId = customerId;
@@ -20,19 +20,4 @@ public class Email {
     }
 
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getTemplate() {
-        return template;
-    }
-
-    public Map<String, String> getData() {
-        return data;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
 }

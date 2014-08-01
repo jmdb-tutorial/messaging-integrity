@@ -29,7 +29,7 @@ public class ApplicationRequestProcessor {
         Application application = request.toApplication();
 
         EventStream eventStream = eventStore.eventStreamFor(application.id);
-        Event event = eventStream.storeEvent(auth.getCurrentUserId(), "application-created", application);
+        Event event = eventStream.storeEvent(auth.currentUserId(), "application-created", application);
 
         try {
             messaging.publishCreatedEvent(application);

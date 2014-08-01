@@ -13,7 +13,7 @@ public class EmailEventPublisher {
     }
 
     public void publishEmailSentEvent(Email email) {
-        History history = new History(email.getCustomerId());
+        History history = new History(email.customerId);
         history.addEvent(new HistoryEvent("email-sent"));
         historyRepository.put(history);
 

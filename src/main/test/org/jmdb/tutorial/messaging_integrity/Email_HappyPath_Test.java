@@ -59,10 +59,10 @@ public class Email_HappyPath_Test {
     @Test
     public void email_is_recorded() {
         Email email = emailRepository.get(emailId);
-        assertThat(email.getCustomerId(), equalTo("CUST-001"));
-        assertThat(email.getAddress(), equalTo("xxxx@xxxx.xxx"));
-        assertThat(email.getTemplate(), equalTo("acceptance-letter"));
-        assertThat(email.getData(), equalTo(data));
+        assertThat(email.customerId, equalTo("CUST-001"));
+        assertThat(email.address, equalTo("xxxx@xxxx.xxx"));
+        assertThat(email.template, equalTo("acceptance-letter"));
+        assertThat(email.data, equalTo(data));
 
     }
 
