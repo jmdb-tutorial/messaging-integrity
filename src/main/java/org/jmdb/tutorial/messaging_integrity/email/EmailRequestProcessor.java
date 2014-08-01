@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 import static java.lang.String.format;
+import static org.jmdb.tutorial.messaging_integrity.email.EmailStatus.SENT;
 import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.PUBLISHED;
 
 public class EmailRequestProcessor {
@@ -42,6 +43,8 @@ public class EmailRequestProcessor {
 
         try {
             smtpGateway.sendEmail(email);
+
+            eventStream.updateStatusOfEvent(event.getId(), SENT);
 
             messaging.publishEmailSentEvent(email);
 

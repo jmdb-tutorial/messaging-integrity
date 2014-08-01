@@ -72,13 +72,10 @@ public class Email_Publishing_Failure_Test {
     }
 
     @Test
-    public void emails_are_in_history() {
+    public void emails_are_not_in_history() {
         History history = historyRepository.getByCustomerId("CUST-001");
 
-        assertThat(history.getEvents().size(), equalTo(1));
-
-        HistoryEvent historyEvent = history.getEvents().get(0);
-        assertThat(historyEvent.getEventType(), equalTo("email-sent"));
+        assertThat(history, nullValue());
     }
 
     @Test
