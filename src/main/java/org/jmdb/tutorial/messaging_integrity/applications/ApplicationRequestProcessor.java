@@ -15,13 +15,13 @@ public class ApplicationRequestProcessor {
     private static final Logger log = LoggerFactory.getLogger(ApplicationRequestProcessor.class);
     private AuthorisationContext auth;
     private EventStore eventStore;
-    private ApplicationEventPublisher messaging;
+    private ApplicationEventQueue applicationEventQueue;
 
 
-    public ApplicationRequestProcessor(AuthorisationContext auth, EventStore eventStore, ApplicationEventPublisher messaging) {
+    public ApplicationRequestProcessor(AuthorisationContext auth, EventStore eventStore, ApplicationEventQueue applicationEventQueue) {
         this.auth = auth;
         this.eventStore = eventStore;
-        this.messaging = messaging;
+        this.applicationEventQueue = applicationEventQueue;
     }
 
 
@@ -32,7 +32,7 @@ public class ApplicationRequestProcessor {
         Event event = eventStream.storeEvent(auth.currentUserId(), "application-created", application);
 
         try {
-            messaging.publishCreatedEvent(application);
+            applicationEventQueue.publishApplicationCreated(application);
 
             eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
 

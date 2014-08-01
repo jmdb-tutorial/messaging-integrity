@@ -3,7 +3,7 @@ package org.jmdb.tutorial.messaging_integrity;
 import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.email.Email;
 import org.jmdb.tutorial.messaging_integrity.email.EmailAdminRepository;
-import org.jmdb.tutorial.messaging_integrity.email.EmailEventPublisher;
+import org.jmdb.tutorial.messaging_integrity.email.EmailEventQueue;
 import org.jmdb.tutorial.messaging_integrity.email.EmailRepository;
 import org.jmdb.tutorial.messaging_integrity.email.EmailRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.email.FakeSMTPGateway;
@@ -42,12 +42,12 @@ public class Email_HappyPath_Test {
         emailAdminRepository = new EmailAdminRepository(eventStore);
 
         historyRepository = new InMemoryHistoryRepository();
-        EmailEventPublisher emailEventPublisher = new EmailEventPublisher(historyRepository);
+        EmailEventQueue emailEventQueue = new EmailEventQueue(historyRepository);
 
         EmailRequestProcessor emailRequestProcessor = new EmailRequestProcessor(new AuthorisationContext(),
                                                                                 eventStore,
                                                                                 smtpGateway,
-                                                                                emailEventPublisher);
+                                                                                emailEventQueue);
 
         data = new HashMap<>();
 

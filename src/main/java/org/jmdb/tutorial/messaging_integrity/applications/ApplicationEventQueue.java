@@ -6,14 +6,14 @@ import org.jmdb.tutorial.messaging_integrity.history.History;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 
-public class ApplicationEventPublisher {
+public class ApplicationEventQueue {
     private HistoryRepository historyRepository;
 
-    public ApplicationEventPublisher(HistoryRepository historyRepository) {
+    public ApplicationEventQueue(HistoryRepository historyRepository) {
         this.historyRepository = historyRepository;
     }
 
-    public void publishCreatedEvent(Application application) {
+    public void publishApplicationCreated(Application application) {
         History history = new History(application.customerId);
         history.addEvent(new ApplicationHistoryEvent("application-created", application.id));
         historyRepository.put(history);

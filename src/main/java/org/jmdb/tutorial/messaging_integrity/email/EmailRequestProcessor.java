@@ -21,17 +21,17 @@ public class EmailRequestProcessor {
     private final AuthorisationContext auth;
     private final EventStore eventStore;
     private final SMTPGateway smtpGateway;
-    private final EmailEventPublisher messaging;
+    private final EmailEventQueue emailEventQueue;
 
 
     public EmailRequestProcessor(AuthorisationContext auth,
                                  EventStore eventStore,
                                  SMTPGateway smtpGateway,
-                                 EmailEventPublisher messaging) {
+                                 EmailEventQueue emailEventQueue) {
         this.auth = auth;
         this.eventStore = eventStore;
         this.smtpGateway = smtpGateway;
-        this.messaging = messaging;
+        this.emailEventQueue = emailEventQueue;
     }
 
     public String sendEmail(String customerId, String emailAddress, String templateName, Map<String, String> data) {
@@ -46,7 +46,7 @@ public class EmailRequestProcessor {
 
             eventStream.updateStatusOfEvent(event.getId(), SENT);
 
-            messaging.publishEmailSentEvent(email);
+            emailEventQueue.publishEmailSent(email);
 
             eventStream.updateStatusOfEvent(event.getId(), PUBLISHED);
 

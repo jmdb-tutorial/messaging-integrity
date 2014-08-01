@@ -4,17 +4,14 @@ import org.jmdb.tutorial.messaging_integrity.applications.FailedToPublishExcepti
 import org.jmdb.tutorial.messaging_integrity.auth.AuthorisationContext;
 import org.jmdb.tutorial.messaging_integrity.email.Email;
 import org.jmdb.tutorial.messaging_integrity.email.EmailAdminRepository;
-import org.jmdb.tutorial.messaging_integrity.email.EmailEventPublisher;
+import org.jmdb.tutorial.messaging_integrity.email.EmailEventQueue;
 import org.jmdb.tutorial.messaging_integrity.email.EmailRepository;
 import org.jmdb.tutorial.messaging_integrity.email.EmailRequestProcessor;
-import org.jmdb.tutorial.messaging_integrity.email.EmailStatus;
-import org.jmdb.tutorial.messaging_integrity.email.FailedToSendEmailException;
 import org.jmdb.tutorial.messaging_integrity.email.FakeSMTPGateway;
 import org.jmdb.tutorial.messaging_integrity.email.SMTPGateway;
 import org.jmdb.tutorial.messaging_integrity.eventstore.EventStore;
 import org.jmdb.tutorial.messaging_integrity.eventstore.InMemoryEventStore;
 import org.jmdb.tutorial.messaging_integrity.history.History;
-import org.jmdb.tutorial.messaging_integrity.history.HistoryEvent;
 import org.jmdb.tutorial.messaging_integrity.history.HistoryRepository;
 import org.jmdb.tutorial.messaging_integrity.history.InMemoryHistoryRepository;
 import org.junit.Before;
@@ -28,7 +25,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.jmdb.tutorial.messaging_integrity.email.EmailStatus.SENT;
-import static org.jmdb.tutorial.messaging_integrity.eventstore.StandardEventStatus.RECORDED;
 
 public class Email_Publishing_Failure_Test {
 
@@ -47,12 +43,12 @@ public class Email_Publishing_Failure_Test {
         emailAdminRepository = new EmailAdminRepository(eventStore);
 
         historyRepository = new InMemoryHistoryRepository();
-        EmailEventPublisher emailEventPublisher = new FailingEmailEventPublisher("xxxx@xxxx.xxx", historyRepository);
+        EmailEventQueue emailEventQueue = new FailingEmailEventQueue("xxxx@xxxx.xxx", historyRepository);
 
         EmailRequestProcessor emailRequestProcessor = new EmailRequestProcessor(new AuthorisationContext(),
                                                                                 eventStore,
                                                                                 smtpGateway,
-                                                                                emailEventPublisher);
+                                                                                emailEventQueue);
 
         data = new HashMap<>();
 
@@ -85,20 +81,20 @@ public class Email_Publishing_Failure_Test {
         assertThat(publishedEmails.size(), equalTo(1));
     }
 
-    private static class FailingEmailEventPublisher extends EmailEventPublisher {
+    private static class FailingEmailEventQueue extends EmailEventQueue {
 
         private final String emailAddressToFailOn;
 
-        private FailingEmailEventPublisher(String emailAddressToFailOn, HistoryRepository historyRepository) {
+        private FailingEmailEventQueue(String emailAddressToFailOn, HistoryRepository historyRepository) {
             super(historyRepository);
             this.emailAddressToFailOn = emailAddressToFailOn;
         }
 
-        @Override public void publishEmailSentEvent(Email email) {
+        @Override public void publishEmailSent(Email email) {
             if (emailAddressToFailOn.equals(email.address)) {
                 throw new FailedToPublishException();
             }
-            super.publishEmailSentEvent(email);
+            super.publishEmailSent(email);
         }
 
     }

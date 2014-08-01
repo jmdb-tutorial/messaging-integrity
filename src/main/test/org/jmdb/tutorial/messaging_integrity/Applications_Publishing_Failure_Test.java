@@ -2,7 +2,7 @@ package org.jmdb.tutorial.messaging_integrity;
 
 import org.jmdb.tutorial.messaging_integrity.applications.Application;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationAdminRepository;
-import org.jmdb.tutorial.messaging_integrity.applications.ApplicationEventPublisher;
+import org.jmdb.tutorial.messaging_integrity.applications.ApplicationEventQueue;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRepository;
 import org.jmdb.tutorial.messaging_integrity.applications.ApplicationRequestProcessor;
 import org.jmdb.tutorial.messaging_integrity.applications.CreateApplicationRequest;
@@ -34,7 +34,7 @@ public class Applications_Publishing_Failure_Test {
         EventStore eventStore = new InMemoryEventStore();
 
         historyRepository = new InMemoryHistoryRepository();
-        ApplicationEventPublisher publisher = new FailingEventPublisher(historyRepository, "APP-001");
+        ApplicationEventQueue publisher = new FailingEventQueue(historyRepository, "APP-001");
 
         applicationRepository = new ApplicationRepository(eventStore);
         applicationAdminRepository = new ApplicationAdminRepository(eventStore);
@@ -69,20 +69,20 @@ public class Applications_Publishing_Failure_Test {
     }
 
 
-    private static class FailingEventPublisher extends ApplicationEventPublisher {
+    private static class FailingEventQueue extends ApplicationEventQueue {
 
         private final String idToFailOn;
 
-        public FailingEventPublisher(HistoryRepository historyRepository, String idToFailOn) {
+        private FailingEventQueue(HistoryRepository historyRepository, String idToFailOn) {
             super(historyRepository);
             this.idToFailOn = idToFailOn;
         }
 
-        @Override public void publishCreatedEvent(Application application) {
+        @Override public void publishApplicationCreated(Application application) {
             if (idToFailOn.equals(application.id)) {
                 throw new FailedToPublishException();
             }
-            super.publishCreatedEvent(application);
+            super.publishApplicationCreated(application);
         }
 
 
